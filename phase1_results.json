@@ -1,0 +1,1 @@
+{"Phase": "Phase 1: LSTM Network", "RMSE": 3.5343, "MAE": 1.201, "R2": 0.6967, "NSE": 0.6967, "CSI": 0.6061, "FAR": 0.2694, "POD": 0.7806, "Threshold": 5.73, "Benchmark_NSE_Target": 0.7, "Benchmark_RMSE_Target": 5.0}
