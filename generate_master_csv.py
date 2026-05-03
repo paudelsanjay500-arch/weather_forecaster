@@ -49,51 +49,84 @@ def generate_master():
     
     indices = dmi.merge(soi, on=['Year', 'Month']).merge(sst, on=['Year', 'Month'])
     
-    print("Loading CAMELS-AUS Hydrometeorology...")
-    station_id = "919003A"
+    stations = {
+        '919003A': 'Mitchell River',
+        '912101A': 'Gregory River',
+        '925001A': 'Wenlock River'
+    }
     
-    # Base path
     base_hydro = "05_hydrometeorology/05_hydrometeorology"
+    all_station_data = []
     
-    def get_station_data(file_rel_path, col_name):
-        df = pd.read_csv(os.path.join(base_hydro, file_rel_path))
-        df['Date'] = pd.to_datetime(df[['year', 'month', 'day']])
-        return df[['Date', station_id]].rename(columns={station_id: col_name})
+    print("Loading CAMELS-AUS Hydrometeorology for multiple stations...")
+    
+    # Load raw files once to save memory
+    precip_raw = pd.read_csv(os.path.join(base_hydro, "01_precipitation_timeseries/precipitation_SILO.csv"))
+    tmax_raw = pd.read_csv(os.path.join(base_hydro, "03_Other/SILO/tmax_SILO.csv"))
+    mslp_raw = pd.read_csv(os.path.join(base_hydro, "03_Other/SILO/mslp_SILO.csv"))
+    rh_raw = pd.read_csv(os.path.join(base_hydro, "03_Other/SILO/rh_tmax_SILO.csv"))
+    
+    def extract_and_format(raw_df, col_name, station_id):
+        df = pd.DataFrame()
+        df['Date'] = pd.to_datetime(raw_df[['year', 'month', 'day']])
+        df[col_name] = raw_df[station_id]
+        return df
 
-    precip = get_station_data("01_precipitation_timeseries/precipitation_SILO.csv", "Rainfall")
-    tmax = get_station_data("03_Other/SILO/tmax_SILO.csv", "Tmax")
-    mslp = get_station_data("03_Other/SILO/mslp_SILO.csv", "MSLP")
-    rh = get_station_data("03_Other/SILO/rh_tmax_SILO.csv", "Humidity")
+    for station_id, station_name in stations.items():
+        print(f"Processing Station: {station_name} ({station_id})...")
+        
+        precip = extract_and_format(precip_raw, 'Rainfall', station_id)
+        tmax = extract_and_format(tmax_raw, 'Tmax', station_id)
+        mslp = extract_and_format(mslp_raw, 'MSLP', station_id)
+        rh = extract_and_format(rh_raw, 'Humidity', station_id)
+        
+        # Merge station data
+        station_df = precip.merge(tmax, on='Date', how='left')\
+                           .merge(mslp, on='Date', how='left')\
+                           .merge(rh, on='Date', how='left')
+        
+        # Filter dates (MSLP only goes up to 2018, so we keep 2000-2024 and impute the rest)
+        station_df = station_df[(station_df['Date'].dt.year >= 2000) & (station_df['Date'].dt.year <= 2024)].copy()
+        
+        # Merge with climate indices
+        station_df['Year'] = station_df['Date'].dt.year
+        station_df['Month'] = station_df['Date'].dt.month
+        station_df = station_df.merge(indices, on=['Year', 'Month'], how='left')
+        
+        # Lags
+        for i in range(1, 8):
+            station_df[f'Rainfall_Lag{i}'] = station_df['Rainfall'].shift(i)
+            
+        # Threshold calculation for the High_Rain_Event (Target Variable)
+        threshold = station_df['Rainfall'].quantile(0.90)
+        station_df['High_Rain_Event'] = (station_df['Rainfall'] > threshold).astype(int)
+        
+        # -------------------------------------------------------------
+        # MISSING VALUE IMPUTATION (Professor's Feedback: Mean/Median)
+        # -------------------------------------------------------------
+        # To preserve seasonality, we fill missing values with the Monthly Mean of that specific feature.
+        # This is scientifically much better than the global mean.
+        numeric_cols = ['Rainfall', 'Tmax', 'MSLP', 'Humidity', 'DMI', 'SOI', 'N34_A'] + [f'Rainfall_Lag{i}' for i in range(1, 8)]
+        
+        for col in numeric_cols:
+            if station_df[col].isnull().sum() > 0:
+                # Calculate monthly mean
+                monthly_means = station_df.groupby('Month')[col].transform('mean')
+                # Fill missing with monthly mean
+                station_df[col] = station_df[col].fillna(monthly_means)
+                # If any still missing (e.g. an entire month was missing), fallback to global median
+                station_df[col] = station_df[col].fillna(station_df[col].median())
+        
+        # Add ID columns
+        station_df['Station_ID'] = station_id
+        station_df['Station_Name'] = station_name
+        
+        all_station_data.append(station_df)
+        
+    print("Concatenating all stations into Master Dataset...")
+    master = pd.concat(all_station_data, ignore_index=True)
     
-    print("Merging Datasets...")
-    master = precip.merge(tmax, on='Date').merge(mslp, on='Date').merge(rh, on='Date')
-    
-    # Filter for 2000-2024
-    master = master[(master['Date'].dt.year >= 2000) & (master['Date'].dt.year <= 2024)]
-    
-    # Merge with monthly indices
-    master['Year'] = master['Date'].dt.year
-    master['Month'] = master['Date'].dt.month
-    master = master.merge(indices, on=['Year', 'Month'], how='left')
-    
-    print("Calculating Lags and Thresholds...")
-    # Lags for Rainfall
-    for i in range(1, 8):
-        master[f'Rainfall_Lag{i}'] = master['Rainfall'].shift(i)
-    
-    # High Rainfall Event (90th percentile)
-    threshold = master['Rainfall'].quantile(0.90)
-    master['High_Rain_Event'] = (master['Rainfall'] > threshold).astype(int)
-    
-    # Interpolate missing values instead of dropping them
-    master = master.interpolate(method='linear')
-    master = master.bfill().ffill()
-    
-    # Add compulsory station identification columns
-    master['Station_ID'] = '919003A'
-    master['Station_Name'] = 'Mitchell River'
-    
-    output_file = "Master_Rainfall_Dataset_Final.csv"
+    output_file = "AuraSentinel_Research_Final/Master_Rainfall_Dataset_Final.csv"
     master.to_csv(output_file, index=False)
     print(f"Master Dataset generated successfully: {output_file}")
     print(f"Total Rows: {len(master)}")

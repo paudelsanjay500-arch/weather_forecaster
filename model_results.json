@@ -1,1 +1,0 @@
-{"RMSE": 4.4873, "MAE": 1.7681, "R2": 0.5108, "Model": "Hybrid CNN-LSTM", "Features": ["Rainfall", "Tmax", "MSLP", "Humidity", "SOI", "DMI", "N34_A"], "Epochs": 5, "Batch_Size": 32}
