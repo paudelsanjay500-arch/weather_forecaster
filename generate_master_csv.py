@@ -85,8 +85,9 @@ def generate_master():
     threshold = master['Rainfall'].quantile(0.90)
     master['High_Rain_Event'] = (master['Rainfall'] > threshold).astype(int)
     
-    # Drop rows with NaN from lags
-    master = master.dropna()
+    # Interpolate missing values instead of dropping them
+    master = master.interpolate(method='linear')
+    master = master.bfill().ffill()
     
     output_file = "Master_Rainfall_Dataset_Final.csv"
     master.to_csv(output_file, index=False)

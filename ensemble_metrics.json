@@ -1,0 +1,1 @@
+{"Phase": "Phase 2: XGBoost Ensemble", "Accuracy": 95.06, "Precision": 0.7374, "Recall": 0.7878, "F1": 0.7617, "RMSE": 3.7912, "MAE": 1.2715, "R2": 0.651, "NSE": 0.651, "CSI": 0.6152, "FAR": 26.26, "POD": 78.78, "Threshold": 5.73}

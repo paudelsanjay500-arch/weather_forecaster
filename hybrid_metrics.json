@@ -1,0 +1,1 @@
+{"Phase": "Phase 3: CNN-LSTM Hybrid", "Accuracy": 93.98, "Precision": 0.7937, "Recall": 0.5396, "F1": 0.6424, "RMSE": 4.1702, "MAE": 1.464, "R2": 0.5778, "NSE": 0.5778, "CSI": 0.4732, "FAR": 20.63, "POD": 53.96, "Threshold": 5.73}
