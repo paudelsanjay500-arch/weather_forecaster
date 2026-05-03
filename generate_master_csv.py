@@ -89,6 +89,10 @@ def generate_master():
     master = master.interpolate(method='linear')
     master = master.bfill().ffill()
     
+    # Add compulsory station identification columns
+    master['Station_ID'] = '919003A'
+    master['Station_Name'] = 'Mitchell River'
+    
     output_file = "Master_Rainfall_Dataset_Final.csv"
     master.to_csv(output_file, index=False)
     print(f"Master Dataset generated successfully: {output_file}")
