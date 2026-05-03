@@ -1,1 +1,1 @@
-{"Phase": "Phase 1: LSTM Network", "RMSE": 3.5343, "MAE": 1.201, "R2": 0.6967, "NSE": 0.6967, "CSI": 0.6061, "FAR": 0.2694, "POD": 0.7806, "Threshold": 5.73, "Benchmark_NSE_Target": 0.7, "Benchmark_RMSE_Target": 5.0}
+{"Phase": "Phase 1: LSTM Network", "Accuracy": 95.09, "Precision": 0.8341, "Recall": 0.6346, "F1": 0.7208, "RMSE": 4.9017, "MAE": 1.865, "R2": 0.7161, "NSE": 0.7161, "CSI": 0.5635, "FAR": 16.59, "POD": 63.46, "Threshold": 13.39}

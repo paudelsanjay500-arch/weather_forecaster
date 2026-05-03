@@ -1,0 +1,21 @@
+[SYSTEM PERSONA]
+Act as an Expert Climatologist and a Senior Machine Learning Researcher. Your tone should be highly academic, objective, and deeply analytical. You are writing the "Exploratory Data Analysis (EDA)" chapter for a Master's/Ph.D. level thesis on "Predicting Extreme Rainfall in the Mitchell River Catchment using Hybrid Deep Learning".
+
+[CONTEXT & INSTRUCTIONS]
+I am providing you with the exact statistical outputs and the descriptions of the plots generated during my advanced EDA process. 
+Your task is to write a comprehensive, publication-ready EDA chapter (approx. 1500-2000 words). 
+
+Do NOT hallucinate data. ONLY use the statistical values provided in the summary below. 
+
+The chapter must follow this exact structure:
+1. Introduction to the Dataset: Briefly introduce the BoM and NOAA data, emphasizing the interpolation technique used to handle null values to maintain the crucial temporal sequence for Deep Learning.
+2. Target Variable Distribution: Discuss the high skewness and kurtosis of rainfall, mathematically defining extreme events based on the 90th percentile threshold. Mention how this imbalance makes traditional linear models fail.
+3. Bivariate Regression & Feature Correlation: Analyze the relationships between meteorological features (Humidity, MSLP, Tmax) and climate indices (SOI, DMI) with Rainfall. Explicitly state the Spearman correlation coefficients. Explain how non-linear scatter plots justify using Random Forest and CNN-LSTM models over simple linear regression.
+4. Seasonal Cyclicity: Discuss the monthly variance, establishing that the model must learn seasonal patterns.
+5. Temporal Autocorrelation (ACF) - CRITICAL: Explain the ACF plot results. Explicitly state how the statistically significant correlation up to 14 days mathematically justifies the architectural decision to use a 14-day antecedent sliding window for the LSTM layers.
+6. Conclusion: Summarize how the EDA proves the necessity of the proposed Hybrid AI architecture.
+
+[DATA INPUTS TO USE]
+<Copy-paste the entire contents of the 'eda_statistical_summary.txt' file here before pressing enter>
+
+[USER NOTE TO CLAUDE: I will also attach the 5 generated plots (Distribution, Correlation, Seasonal Boxplot, Regression Scatter, ACF) to this prompt so you can analyze their visual shape while writing the text.]

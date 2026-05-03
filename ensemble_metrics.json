@@ -1,1 +1,1 @@
-{"Phase": "Phase 2: XGBoost Ensemble", "Accuracy": 95.06, "Precision": 0.7374, "Recall": 0.7878, "F1": 0.7617, "RMSE": 3.7912, "MAE": 1.2715, "R2": 0.651, "NSE": 0.651, "CSI": 0.6152, "FAR": 26.26, "POD": 78.78, "Threshold": 5.73}
+{"Phase": "Phase 2: XGBoost Ensemble", "Accuracy": 94.66, "Precision": 0.7484, "Recall": 0.7007, "F1": 0.7238, "RMSE": 5.0644, "MAE": 1.899, "R2": 0.697, "NSE": 0.697, "CSI": 0.5671, "FAR": 25.16, "POD": 70.07, "Threshold": 13.39}

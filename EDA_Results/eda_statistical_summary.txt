@@ -1,0 +1,33 @@
+====================================================
+     ADVANCED EDA STATISTICAL SUMMARY FOR THESIS    
+====================================================
+
+### 1. RAINFALL DISTRIBUTION STATISTICS ###
+- Total Days Analyzed: 41640
+- Skewness: 5.17 (Highly right-skewed, justifying complex non-linear models)
+- Kurtosis: 39.71 (Heavy tails, indicating extreme flood events)
+- 90th Percentile Threshold (Extreme Event): 8.11 mm
+- 95th Percentile Threshold: 15.54 mm
+- 99th Percentile Threshold: 37.42 mm
+
+### 2. CORRELATION ANALYSIS (SPEARMAN RANK) ###
+- Spearman correlation is used instead of Pearson because Rainfall data is not normally distributed.
+- Correlation with MSLP (Pressure): -0.551 (Negative correlation indicates low pressure brings rain)
+- Correlation with Humidity: 0.647 (Positive correlation confirms moisture requirement)
+- Correlation with Tmax: -0.014
+- Correlation with SOI (ENSO): 0.182 (Positive indicates La Niña brings extreme rain)
+
+### 3. SEASONAL ANALYSIS ###
+- Peak Rainfall Month: Month 1 (Avg: 7.90 mm)
+- Boxplots show significant variance during the wet season, confirming seasonal cyclicity which the deep learning model must learn.
+
+### 4. REGRESSION & BIVARIATE ANALYSIS ###
+- Regression plots confirm non-linear relationships. Linear regression lines show weak fit, mathematically proving why standard linear models (like MLR or ARIMA) fail for this catchment, and why Random Forest and CNN-LSTM are strictly necessary.
+
+### 5. TEMPORAL AUTOCORRELATION (ACF) ###
+- The ACF plot shows statistically significant correlation extending up to 14 days.
+- THIS IS CRITICAL FOR THE THESIS: This plot provides the mathematical justification for selecting a 14-day sliding window architecture for the LSTM and CNN-LSTM models.
+
+====================================================
+     END OF SUMMARY. USE THIS FOR CLAUDE PROMPT.    
+====================================================
