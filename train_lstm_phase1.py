@@ -113,7 +113,7 @@ def train_phase1_lstm():
     }
     
     # Save Results
-    with open('AuraSentinel_Research_Final/phase1_results.json', 'w') as f:
+    with open('phase1_results.json', 'w') as f:
         json.dump(results, f)
     
     print("\n--- PHASE 1 PERFORMANCE ---")
