@@ -1,1 +1,1 @@
-{"Phase": "Phase 3: CNN-LSTM Hybrid", "Accuracy": 93.56, "Precision": 0.7342, "Recall": 0.5577, "F1": 0.6339, "RMSE": 5.4616, "MAE": 2.0296, "R2": 0.6476, "NSE": 0.6476, "CSI": 0.464, "FAR": 26.58, "POD": 55.77, "Threshold": 13.39}
+{"Phase": "Phase 3: CNN-LSTM Hybrid", "Accuracy": 94.17, "Precision": 0.7447, "Recall": 0.6346, "F1": 0.6853, "RMSE": 5.6339, "MAE": 3.0441, "R2": 0.625, "NSE": 0.625, "CSI": 0.5212, "FAR": 25.53, "POD": 63.46, "Threshold": 13.39}

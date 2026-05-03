@@ -2,7 +2,7 @@ import pandas as pd
 import numpy as np
 import tensorflow as tf
 from tensorflow.keras.models import Sequential
-from tensorflow.keras.layers import LSTM, Dense, Dropout, Conv1D, MaxPooling1D
+from tensorflow.keras.layers import LSTM, Dense, Dropout, Conv1D, MaxPooling1D, BatchNormalization
 from sklearn.preprocessing import MinMaxScaler
 from sklearn.metrics import mean_squared_error, mean_absolute_error, r2_score, accuracy_score, precision_score, recall_score, f1_score
 import json
@@ -54,25 +54,28 @@ def train_phase3_hybrid():
     X_train, X_test = X[:split], X[split:]
     y_train, y_test = y[:split], y[split:]
     
-    print("Training CNN-LSTM Hybrid Model...")
+    print("Training Enhanced Deep CNN-LSTM Hybrid Model...")
     model = Sequential([
-        # Pattern Extraction (Spatial)
-        Conv1D(filters=64, kernel_size=3, activation='relu', input_shape=(window, len(features))),
+        # Advanced Spatial Feature Extraction
+        Conv1D(filters=128, kernel_size=3, activation='relu', input_shape=(window, len(features))),
+        BatchNormalization(),
         MaxPooling1D(pool_size=2),
         Dropout(0.2),
         
-        # Temporal Sequencing
+        # Deep Temporal Sequencing
+        LSTM(100, return_sequences=True),
+        Dropout(0.2),
         LSTM(50, return_sequences=False),
         Dropout(0.2),
         
         # Final Prediction
-        Dense(25, activation='relu'),
+        Dense(50, activation='relu'),
         Dense(1)
     ])
     
     model.compile(optimizer='adam', loss='mse')
     
-    model.fit(X_train, y_train, epochs=20, batch_size=32, validation_split=0.1, verbose=1)
+    model.fit(X_train, y_train, epochs=30, batch_size=32, validation_split=0.1, verbose=1)
     
     predictions = model.predict(X_test)
     
