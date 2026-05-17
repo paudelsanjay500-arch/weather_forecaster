@@ -1,1 +1,17 @@
-{"Phase": "Phase 2: XGBoost Ensemble", "Accuracy": 94.66, "Precision": 0.7484, "Recall": 0.7007, "F1": 0.7238, "RMSE": 5.0644, "MAE": 1.899, "R2": 0.697, "NSE": 0.697, "CSI": 0.5671, "FAR": 25.16, "POD": 70.07, "Threshold": 13.39}
+{
+  "Phase": "Phase 2: RF + GB Ensemble",
+  "Accuracy": 97.0,
+  "Precision": 0.8879,
+  "Recall": 0.4567,
+  "F1": 0.6032,
+  "RMSE": 3.8012,
+  "MAE": 1.7725,
+  "R2": 0.6159,
+  "NSE": 0.6159,
+  "CSI": 0.4318,
+  "FAR": 11.21,
+  "POD": 45.67,
+  "Threshold": 15.38,
+  "Stations": "229650A | 212209 | 405209",
+  "Region": "Melbourne + Sydney"
+}

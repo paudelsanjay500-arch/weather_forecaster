@@ -1,1 +1,17 @@
-{"Phase": "Phase 3: CNN-LSTM Hybrid", "Accuracy": 94.17, "Precision": 0.7447, "Recall": 0.6346, "F1": 0.6853, "RMSE": 5.6339, "MAE": 3.0441, "R2": 0.625, "NSE": 0.625, "CSI": 0.5212, "FAR": 25.53, "POD": 63.46, "Threshold": 13.39}
+{
+  "Phase": "Phase 3: CNN-BiLSTM-Attention Hybrid",
+  "Accuracy": 97.43,
+  "Precision": 0.8391,
+  "Recall": 0.4398,
+  "F1": 0.5771,
+  "RMSE": 3.6308,
+  "MAE": 1.6631,
+  "R2": 0.6495,
+  "NSE": 0.6495,
+  "CSI": 0.4056,
+  "FAR": 16.09,
+  "POD": 43.98,
+  "Threshold": 17.14,
+  "Stations": "229650A | 212209 | 405209",
+  "Region": "Melbourne + Sydney"
+}
