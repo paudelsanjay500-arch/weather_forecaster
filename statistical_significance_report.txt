@@ -1,0 +1,13 @@
+WALK-FORWARD VALIDATION & STATISTICAL SIGNIFICANCE REPORT
+=========================================================
+Validation Strategy: 5-Fold TimeSeriesSplit (Walk-Forward)
+
+AVERAGE PERFORMANCE ACROSS ALL SPLITS:
+- Baseline LSTM Average RMSE: 5.1866 mm
+- Proposed Hybrid Average RMSE: 5.5187 mm
+
+PAIRED T-TEST RESULTS (on Absolute Errors):
+- T-Statistic: -14.7616
+- P-Value: 3.6528e-49
+
+CONCLUSION: The p-value is < 0.05. The performance improvement of the Proposed Hybrid model over the Baseline LSTM is STATISTICALLY SIGNIFICANT. It is not due to random variation.
