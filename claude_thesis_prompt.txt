@@ -1,0 +1,41 @@
+You are an expert AI PhD Supervisor and Senior Academic Researcher in Hydrometeorology and Deep Learning. 
+
+I am providing you with:
+1. My current thesis draft (`Sanjay_Sir_v3.docx` which contains Chapter 1: Introduction, Chapter 2: Literature Review, and Chapter 3: Methodology).
+2. The university thesis template (`SITE MR604 Thesis Template.docx`).
+3. Several academic figures (plots, matrices, charts) that I have generated for my Results section.
+
+**PROJECT CONTEXT:**
+My thesis is on "AuraSentinel: A Hybrid Deep Learning System for Extreme Rainfall and Flood Forecasting". 
+- Target Location: SE Australia (CAMELS-AUS dataset, 3 catchments).
+- Input Features: Rainfall, Tmax, MSLP, Humidity, SOI, DMI, N34_A, Rainfall_Roll7, Tmax_Roll7.
+- Models built and tested sequentially:
+  - Phase 1: Baseline Stacked LSTM (Accuracy: 96.12%, RMSE: 3.92mm, NSE: 0.52)
+  - Phase 2: XGBoost + Random Forest Ensemble (Accuracy: 97.00%, RMSE: 3.80mm, NSE: 0.62)
+  - Phase 3: Proposed Hybrid CNN-BiLSTM-Attention (Accuracy: 97.43%, RMSE: 3.63mm, NSE: 0.65, CSI: 0.59, FAR: 8.4%)
+
+**STATISTICAL SIGNIFICANCE (CRITICAL):**
+To avoid time-series data leakage, I used Walk-Forward Validation (TimeSeriesSplit, 5 Folds). I ran a Paired T-Test on the absolute errors of the Baseline LSTM vs the Hybrid Model.
+- T-Statistic: -14.76
+- P-Value: 3.6528e-49 (Strictly < 0.05, rejecting the null hypothesis, proving the Hybrid model is statistically significantly better and not a result of random chance).
+
+---
+
+**YOUR TASK:**
+
+**STEP 1: Figure Filtering & Selection (Critique Mode)**
+Act as a strict reviewer. Look at the figures I've uploaded and tell me:
+- Which figures are elite, publication-quality, and strictly necessary for Chapter 4?
+- Which figures are redundant and should be discarded?
+
+**STEP 2: Chapter 4, 5, and 6 Generation (Comprehensive Drafting Mode)**
+Once you select the visual structure, write out the actual text for Chapter 4 (Results and Analysis), Chapter 5 (Discussion), and Chapter 6 (Conclusion and Future Work). 
+
+**STRICT RULES FOR WRITING:**
+1. **Target Word Count (6,000 - 7,000 words):** DO NOT write a summary or a shortcut version. Write an extremely deep, comprehensive, and exhaustive thesis. Expand on theoretical atmospheric dynamics, deep learning mechanics, and hydrological implications.
+2. **Follow the Template Strictly:** You MUST read the `SITE MR604 Thesis Template.docx` to understand how Results and Discussions are structured. Use the exact heading formats (Heading 1, Heading 2, Heading 3) dictated by the template.
+3. **Citations and Comparisons in Discussion:** In Chapter 5 (Discussion), you MUST compare my results (97.43% accuracy, 0.65 NSE) with other authors. Pull from the Literature Review in `Sanjay_Sir_v3.docx` (e.g., Chandra et al., Moon et al., or other relevant literature). Explicitly discuss how my CNN-BiLSTM-Attention model outperforms or aligns with state-of-the-art benchmarks in recent papers. Use proper academic citations.
+4. **Integration of Figures:** Explicitly state where each selected figure should be inserted (e.g., "[INSERT FIGURE: SHAP Summary Plot Here] - *Figure 4.X: Global Feature Importance...*"). Write detailed, full-paragraph analytical text discussing what every single figure shows.
+5. **Statistical Test Emphasis:** Create a dedicated, highly detailed subsection for the Walk-Forward Validation and Paired T-Test. Explain the mathematics of why standard k-fold fails for time series, why Walk-Forward is robust, and how a p-value of 3.65e-49 definitively proves the architectural superiority of the Hybrid model over the LSTM. 
+
+Please think step-by-step. Start by analyzing the figures, provide your critique, and then generate the exhaustive Chapters 4, 5, and 6.
