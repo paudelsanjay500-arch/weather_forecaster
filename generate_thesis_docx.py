@@ -67,7 +67,7 @@ def create_thesis_chapters():
     add_figure('Thesis_Figures/FigI_Scatter_Actual_Predicted.png', 'Figure 4.8: Scatter Plot Comparison of Observed vs. Predicted Rainfall')
 
     add_heading('4.5 Quantitative Performance Metrics', 2)
-    doc.add_paragraph("A comprehensive evaluation requires multiple deterministic metrics. As shown in the comparative bar charts (Figure 4.9), the Hybrid model consistently outperforms the baselines across all dimensions. Specifically, it achieves the lowest Root Mean Square Error (RMSE = 3.63 mm) and Mean Absolute Error (MAE = 1.58 mm). Most notably for hydrological applications, the Critical Success Index (CSI) reached 0.59, and the False Alarm Rate (FAR) was minimized to 8.4%.")
+    doc.add_paragraph("A comprehensive evaluation requires multiple deterministic metrics. As shown in the comparative bar charts (Figure 4.9), the Hybrid model consistently outperforms the baselines across all dimensions. Specifically, it achieves the lowest Root Mean Square Error (RMSE = 3.70 mm) and Mean Absolute Error (MAE = 1.86 mm). Most notably for hydrological applications, the Critical Success Index (CSI) reached 0.36, and the False Alarm Rate (FAR) was minimized to 15.58%.")
     add_figure('Thesis_Figures/Fig_J_RMSE_Comparison.png', 'Figure 4.9a: RMSE Comparison')
     add_figure('Thesis_Figures/Fig_M_CSI_Comparison.png', 'Figure 4.9b: Critical Success Index Comparison')
     add_figure('Thesis_Figures/Fig_N_False_Comparison.png', 'Figure 4.9c: False Alarm Rate Comparison')
@@ -100,7 +100,7 @@ def create_thesis_chapters():
 
     add_heading('5.2 Thesis Conclusion', 2)
     doc.add_paragraph("This research successfully engineered, optimized, and validated the AuraSentinel flood forecasting system. The objective of outperforming standard machine learning and baseline deep learning models was conclusively achieved. The proposed Hybrid CNN-BiLSTM-Attention architecture demonstrated unparalleled efficacy in capturing the complex, non-linear spatiotemporal dynamics of extreme rainfall events.")
-    doc.add_paragraph("By integrating 1D Convolutional layers for spatial feature extraction, Bidirectional LSTMs for chronological memory, and an Attention mechanism to prioritize peak intensity days, the system achieved a champion accuracy of 97.43% with a minimal RMSE of 3.63mm. The rigorous evaluation harness, including Walk-Forward validation, SHAP explainability, and paired statistical testing, establishes this framework as a highly robust, operationally viable tool for early disaster warning in the context of escalating global climate volatility.")
+    doc.add_paragraph("By integrating 1D Convolutional layers for spatial feature extraction, Bidirectional LSTMs for chronological memory, and an Attention mechanism to prioritize peak intensity days, the system achieved a champion accuracy of 97.29% with a minimal RMSE of 3.70mm. The rigorous evaluation harness, including Walk-Forward validation, SHAP explainability, and paired statistical testing, establishes this framework as a highly robust, operationally viable tool for early disaster warning in the context of escalating global climate volatility.")
 
     doc.save('Chapter_4_5_6_Complete_Results.docx')
 
